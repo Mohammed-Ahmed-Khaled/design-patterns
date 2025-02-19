@@ -1,68 +1,53 @@
-class User {
-  final String firstName;
-  final String lastName;
-  final int? age;
-  final String? phone;
+abstract class Shape {
+  void revealMe();
+}
 
-  User({
-    required this.firstName,
-    required this.lastName,
-    this.age,
-    this.phone,
-  });
-
+class Circle implements Shape {
   @override
-  String toString() {
-    return 'User: { First Name: $firstName, Last Name: $lastName, Age: ${age ?? "Not provided"}, Phone: ${phone ?? "Not provided"} }';
+  void revealMe() {
+    print("You chose to print circle");
   }
 }
 
-class UserBuilder {
-  String? _firstName;
-  String? _lastName;
-  int? _age;
-  String? _phone;
-
-  UserBuilder setFirstName(String firstName) {
-    _firstName = firstName;
-    return this;
+class Rectangle implements Shape {
+  @override
+  void revealMe() {
+    print("You chose to print rectangle");
   }
+}
 
-  UserBuilder setLastName(String lastName) {
-    _lastName = lastName;
-    return this;
+class Square implements Shape {
+  @override
+  void revealMe() {
+    print("You chose to print square");
   }
+}
 
-  UserBuilder setAge(int age) {
-    _age = age;
-    return this;
-  }
-
-  UserBuilder setPhone(String phone) {
-    _phone = phone;
-    return this;
-  }
-
-  User build() {
-    if (_firstName == null || _lastName == null) {
-      throw Exception("First name and last name are required");
+class ShapeFactory {
+  Shape? getShape(String shapeType) {
+    switch (shapeType.toLowerCase()) {
+      case 'circle':
+        return Circle();
+      case 'rectangle':
+        return Rectangle();
+      case 'square':
+        return Square();
+      default:
+        print("Invalid shape type");
+        return null;
     }
-    return User(
-      firstName: _firstName!,
-      lastName: _lastName!,
-      age: _age,
-      phone: _phone,
-    );
   }
 }
 
 void main() {
-  User user = UserBuilder()
-      .setFirstName("Mohammed")
-      .setLastName("Khaled")
-      .setAge(25)
-      .setPhone("01111111111")
-      .build();
+  ShapeFactory shapeFactory = ShapeFactory();
 
-  print(user);
+  Shape? circle = shapeFactory.getShape("circle");
+  circle?.revealMe();
+
+  Shape? rectangle = shapeFactory.getShape("rectangle");
+  rectangle?.revealMe();
+
+  Shape? square = shapeFactory.getShape("square");
+  square?.revealMe();
 }
