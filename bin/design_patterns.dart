@@ -1,53 +1,27 @@
-abstract class Shape {
-  void revealMe();
-}
+class Database {
+  static final Database _instance = Database._internal();
 
-class Circle implements Shape {
-  @override
-  void revealMe() {
-    print("You chose to print circle");
+  Database._internal();
+
+  factory Database.getInstance() {
+    return _instance;
   }
-}
 
-class Rectangle implements Shape {
-  @override
-  void revealMe() {
-    print("You chose to print rectangle");
-  }
-}
-
-class Square implements Shape {
-  @override
-  void revealMe() {
-    print("You chose to print square");
-  }
-}
-
-class ShapeFactory {
-  Shape? getShape(String shapeType) {
-    switch (shapeType.toLowerCase()) {
-      case 'circle':
-        return Circle();
-      case 'rectangle':
-        return Rectangle();
-      case 'square':
-        return Square();
-      default:
-        print("Invalid shape type");
-        return null;
-    }
+  void createDatabase() {
+    print("Database instance created!");
   }
 }
 
 void main() {
-  ShapeFactory shapeFactory = ShapeFactory();
+  Database db1 = Database.getInstance();
+  Database db2 = Database.getInstance();
 
-  Shape? circle = shapeFactory.getShape("circle");
-  circle?.revealMe();
+  db1.createDatabase();
+  db2.createDatabase();
 
-  Shape? rectangle = shapeFactory.getShape("rectangle");
-  rectangle?.revealMe();
-
-  Shape? square = shapeFactory.getShape("square");
-  square?.revealMe();
+  if (db1 == db2) {
+    print("Both instances are the same. Singleton applied successfully!");
+  } else {
+    print("Singleton pattern not applied correctly.");
+  }
 }

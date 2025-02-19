@@ -1,10 +1,10 @@
-# Shape Factory Pattern in Dart
+# Singleton Database Pattern in Dart
 
 ## Overview
-This project demonstrates the **Factory Design Pattern** in Dart by creating a `Shape` class and a `ShapeFactory` to generate objects dynamically.
+This project demonstrates the **Singleton Design Pattern** in Dart by ensuring only one instance of a `Database` class is created.
 
 ## Features
-- Uses an abstract `Shape` class with a `revealMe()` method.
-- Implements concrete classes: `Circle`, `Rectangle`, and `Square`.
-- Uses `ShapeFactory` to return the appropriate shape object based on input.
-- Prevents the need to specify exact classes during object creation.
+- Implements a **private constructor** to restrict instantiation.
+- Uses a **static instance** to ensure only one object is created.
+- Provides a **factory method** `getInstance()` to return the same instance.
+- Demonstrates the singleton pattern by comparing two instances.
