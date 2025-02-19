@@ -1,27 +1,35 @@
-class Database {
-  static final Database _instance = Database._internal();
+abstract class Payment {
+  void pay(double amount);
+}
 
-  Database._internal();
-
-  factory Database.getInstance() {
-    return _instance;
+class CashPayment implements Payment {
+  @override
+  void pay(double amount) {
+    print("Paid \$$amount using Cash.");
   }
+}
 
-  void createDatabase() {
-    print("Database instance created!");
+class CreditPayment implements Payment {
+  @override
+  void pay(double amount) {
+    print("Paid \$$amount using Credit Card.");
+  }
+}
+
+class PaymentProcessor {
+  final Payment paymentMethod;
+
+  PaymentProcessor(this.paymentMethod);
+
+  void processPayment(double amount) {
+    paymentMethod.pay(amount);
   }
 }
 
 void main() {
-  Database db1 = Database.getInstance();
-  Database db2 = Database.getInstance();
+  PaymentProcessor cashProcessor = PaymentProcessor(CashPayment());
+  cashProcessor.processPayment(100);
 
-  db1.createDatabase();
-  db2.createDatabase();
-
-  if (db1 == db2) {
-    print("Both instances are the same. Singleton applied successfully!");
-  } else {
-    print("Singleton pattern not applied correctly.");
-  }
+  PaymentProcessor creditProcessor = PaymentProcessor(CreditPayment());
+  creditProcessor.processPayment(250);
 }

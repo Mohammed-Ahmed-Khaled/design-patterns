@@ -1,10 +1,11 @@
-# Singleton Database Pattern in Dart
+# SOLID Payment System in Dart
 
 ## Overview
-This project demonstrates the **Singleton Design Pattern** in Dart by ensuring only one instance of a `Database` class is created.
+This project demonstrates a **Simple Payment System** in Dart, applying the **SOLID principles** to ensure clean, maintainable, and scalable code.
 
 ## Features
-- Implements a **private constructor** to restrict instantiation.
-- Uses a **static instance** to ensure only one object is created.
-- Provides a **factory method** `getInstance()` to return the same instance.
-- Demonstrates the singleton pattern by comparing two instances.
+- Implements **Single Responsibility Principle (SRP)** by separating concerns.
+- Follows **Open/Closed Principle (OCP)** for easy extension with new payment methods.
+- Ensures **Liskov Substitution Principle (LSP)** by using a common `Payment` interface.
+- Applies **Interface Segregation Principle (ISP)** by keeping interfaces focused.
+- Uses **Dependency Inversion Principle (DIP)** by depending on abstractions rather than concrete implementations.
